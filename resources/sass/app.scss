@@ -1,0 +1,22 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic');
+@import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
+
+// font awesome
+@import '~font-awesome/scss/font-awesome.scss';
+// ionicons
+@import '~ionicons/dist/scss/ionicons.scss';
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+// AdminLTE theme
+@import './AdminLTE.scss';
+// AdminLTE skin
+@import './skin-red.min.scss';
+// Auth style
+@import './auth.scss';
