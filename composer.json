@@ -58,6 +58,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-		"start": "php artisan serve --port 3000"
+		"start": "php artisan serve --port 3000",
+		"migrate": "php artisan migrate:fresh --seed"
     }
 }
