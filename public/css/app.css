@@ -6563,6 +6563,14 @@
   content: "\F3AA";
 }
 
+.bg-white {
+  background-color: #fff;
+}
+
+.brand-name {
+  font-family: "Courgette", sans-serif;
+}
+
 /*!
  * AdminLTE v2.4.18
  * 
@@ -23031,5 +23039,9 @@ hr {
 
 body {
   background-color: #f2f2f2;
+}
+
+.register__form {
+  padding: 2rem 1rem;
 }
 

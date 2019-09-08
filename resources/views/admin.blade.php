@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
-@section('main')
+@section('react-app')
 <div id="react-app"></div>
 @endsection
