@@ -1,14 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const MainWrapper = ({ children }) => {
-  const [pic, setPic] = useState('default.png');
-
-  axios.get('/api/user')
-	.then(res => {
-	  console.log(res.data);
-	});
-
-
 
   return (
 	<div className="content-wrapper">

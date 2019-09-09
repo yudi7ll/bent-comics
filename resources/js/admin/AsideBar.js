@@ -16,7 +16,7 @@ const AsideBar = () => {
 		  <h3 className="control-sidebar-heading">Recent Activity</h3>
 		  <ul className="control-sidebar-menu">
 			<li>
-			  <a href="javascript:;">
+			  <a href="#">
 				<i className="menu-icon fa fa-birthday-cake bg-red"></i>
 
 				<div className="menu-info">
@@ -32,7 +32,7 @@ const AsideBar = () => {
 		  <h3 className="control-sidebar-heading">Tasks Progress</h3>
 		  <ul className="control-sidebar-menu">
 			<li>
-			  <a href="javascript:;">
+			  <a href="#">
 				<h4 className="control-sidebar-subheading">
 				  Custom Template Design
 				  <span className="pull-right-container">
@@ -61,7 +61,12 @@ const AsideBar = () => {
 			<div className="form-group">
 			  <label className="control-sidebar-subheading">
 				Report panel usage
-				<input type="checkbox" className="pull-right" checked />
+				<input
+				  type="checkbox"
+				  className="pull-right"
+				  checked
+				  onChange={e => console.log(e)}
+				/>
 			  </label>
 
 			  <p>
@@ -78,7 +83,7 @@ const AsideBar = () => {
 	{/* Add the sidebar's background. This div must be placed
 	// immediately after the control sidebar */}
 	<div className="control-sidebar-bg"></div>
-  </>
+	</>
   );
 }
 

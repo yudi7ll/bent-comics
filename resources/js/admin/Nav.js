@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Nav = () => {
+const Nav = ({ auth }) => {
   
   return (
 	<header className="main-header">
@@ -19,14 +20,18 @@ const Nav = () => {
 		  <span className="sr-only">Toggle navigation</span>
 		</a>
 
-		<NavRightMenu />
+		<NavRightMenu
+		  auth={ auth }
+		/>
 
 	  </nav>
 	</header>
   );
 }
 
-const NavRightMenu = () => {
+const NavRightMenu = ({ auth }) => {
+  const { data } = auth;
+
   return (
 	<div className="navbar-custom-menu">
 	  <ul className="nav navbar-nav">
@@ -46,7 +51,7 @@ const NavRightMenu = () => {
 				  <a href="#">
 					<div className="pull-left">
 					  {/* User Image  */}
-					  <img src="img/user2-160x160.jpg" className="img-circle" alt="User Image" />
+					  <img src={'/img/' + data.picture } className="img-circle" alt={data.name} />
 					</div>
 					{/* Message title and timestamp  */}
 					<h4>
@@ -131,9 +136,9 @@ const NavRightMenu = () => {
 		  {/* Menu Toggle Button  */}
 		  <a href="#" className="dropdown-toggle" data-toggle="dropdown">
 			{/* The user image in the navbar */}
-			<img src="img/user2-160x160.jpg" className="user-image" alt="User Image" />
+			<img src={ '/img/' + data.picture } className="user-image" alt={ data.name } />
 			{/* hidden-xs hides the username on small devices so only the image appears.  */}
-			<span className="hidden-xs">{ 'name' }</span>
+			<span className="hidden-xs">{ data.name }</span>
 		  </a>
 		  <ul className="dropdown-menu">
 			{/* The user image in the menu  */}
@@ -141,8 +146,8 @@ const NavRightMenu = () => {
 			  <img src="img/user2-160x160.jpg" className="img-circle" alt="User Image" />
 
 			  <p>
-				{ 'name' }
-				<small>{ 'username' }</small>
+				{ data.name }
+				<small>{ data.email }</small>
 			  </p>
 			</li>
 			{/* Menu Body  */}
@@ -166,7 +171,7 @@ const NavRightMenu = () => {
 				<a href="#" className="btn btn-default btn-flat">Profile</a>
 			  </div>
 			  <div className="pull-right">
-				<a href="{{ route('logout') }}" className="btn btn-default btn-flat">Sign out</a>
+				<a href="/logout" className="btn btn-default btn-flat">Sign out</a>
 			  </div>
 			</li>
 		  </ul>
@@ -180,4 +185,6 @@ const NavRightMenu = () => {
   );
 }
 
-export default Nav;
+export default connect(
+  props => props
+)(Nav);

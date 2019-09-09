@@ -20,8 +20,12 @@ class CreateUsersTable extends Migration
 		$table->smallInteger('level')->default(3);
 		$table->timestamp('email_verified_at')->nullable();
 		$table->string('password');
+		$table->string('api_token', 80)
+		  ->unique()
+		  ->nullable()
+		  ->default(null);
 		$table->string('picture')->default('default.png');
-		$table->date('birth_date')->nullable();
+		$table->date('birth_date')->nullable()->default(null);
 		$table->rememberToken();
 		$table->timestamps();
 		$table->index(['username', 'email', 'name']);

@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const AsideNav = () => {
+const AsideNav = ({ auth }) => {
+  const { data } = auth;
+
   return (
 	<aside className="main-sidebar">
 
@@ -10,12 +13,12 @@ const AsideNav = () => {
 		{/* Sidebar user panel (optional) */}
 		<div className="user-panel">
 		  <div className="pull-left image">
-			<img src="{' asset('img/user2-160x160.jpg') '}" className="img-circle" alt="User Image" />
+			<img src={'/img/' + data.picture} className="img-circle" alt={data.name} />
 		  </div>
 		  <div className="pull-left info">
-			<p>{'name'}</p>
+			<p>{ data.name }</p>
 			{/* Status */}
-			<a href="#"><i className="fa fa-circle text-success"></i> Online</a>
+			<a href="#"><i className="fa fa-circle text-success"></i> { data.email }</a>
 		  </div>
 		</div>
 
@@ -56,4 +59,6 @@ const AsideNav = () => {
   );
 }
 
-export default AsideNav;
+export default connect(
+  props => props
+)(AsideNav);

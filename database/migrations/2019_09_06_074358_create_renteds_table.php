@@ -18,10 +18,9 @@ class CreateRentedsTable extends Migration
             $table->bigIncrements('id');
 			$table->string('user_username');
 			$table->timestamp('deadline');
-			$table->timestamp('rented_at')->default(Carbon::now());
 			$table->boolean('is_returned')->default(0);
 			$table->timestamp('returned_at')->nullable();
-            $table->timestamps();
+			$table->timestamp('rented_at')->default(Carbon::now());
 
 			$table
 			  ->foreign('user_username')
