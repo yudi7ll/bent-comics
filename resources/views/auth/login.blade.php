@@ -15,13 +15,13 @@
 	  <div class="form-group">
 		<label for="email" class="col-sm-3 control-label">Email</label>
 		<div class="col-sm-9">
-		  <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+		  <input type="email" name="email" class="form-control" id="email" placeholder="Email" required value="{{ old('email') }}" />
 		</div>
 	  </div>
 	  <div class="form-group">
 		<label for="password" class="col-sm-3 control-label">Password</label>
 		<div class="col-sm-9">
-		  <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+		  <input type="password" name="password" class="form-control" id="password" placeholder="Password" required />
 		</div>
 	  </div>
 	  <div class="form-group">

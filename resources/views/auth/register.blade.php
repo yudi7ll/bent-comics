@@ -11,19 +11,19 @@
 	  <div class="form-group">
 		<label for="name" class="col-sm-3 control-label">Name</label>
 		<div class="col-sm-9">
-		  <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required old('name') >
+		  <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required value="{{old('name')}}">
 		</div>
 	  </div>
 	  <div class="form-group">
 		<label for="idktp" class="col-sm-3 control-label">ID. KTP</label>
 		<div class="col-sm-9">
-		  <input type="text" class="form-control" id="idktp" name="idktp" placeholder="Ex. 517101030XXXXXXX" required old('idktp')>
+		  <input type="text" class="form-control" id="idktp" name="idktp" placeholder="Ex. 517101030XXXXXXX" required value="{{old('idktp')}}">
 		</div>
 	  </div>
 	  <div class="form-group">
 		<label for="email" class="col-sm-3 control-label">Email</label>
 		<div class="col-sm-9">
-		  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required old('email')>
+		  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required value="{{old('email')}}">
 		</div>
 	  </div>
 	  <div class="form-group">
@@ -41,7 +41,7 @@
 	  <div class="form-group">
 		<label for="birthdate" class="col-sm-3 control-label">Birth Date</label>
 		<div class="col-sm-9">
-		  <input type="date" class="form-control" id="birthdate" name="birth_date" required old('birth_date')>
+		  <input type="date" class="form-control" id="birthdate" name="birth_date" required value="{{old('birth_date')}}">
 		</div>
 	  </div>
 	  <div class="form-group">

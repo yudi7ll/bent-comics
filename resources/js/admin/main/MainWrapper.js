@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Wrapper = ({ children }) => {
+const MainWrapper = ({ children, title }) => {
 
   return (
 	<div className="content-wrapper">
 	  <section className="content-header">
 		<h1>
-		  Dashboard
+		  { title }
 		  <small>Current status</small>
 		</h1>
 		<ol className="breadcrumb">
@@ -24,12 +24,4 @@ const Wrapper = ({ children }) => {
   );
 }
 
-const Dashboard = () => {
-  return (
-	<Wrapper>
-	  <h1>Dashboard Page</h1>
-	</Wrapper>
-  );
-}
-
-export default Dashboard;
+export default MainWrapper;

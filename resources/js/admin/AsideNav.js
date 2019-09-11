@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const AsideNav = ({ auth }) => {
+const AsideNav = ({ auth, location }) => {
   const { data } = auth;
+
+  const activeLinks = link => {
+	return location.pathname.includes(link) ? 'active' : '';
+  }
 
   return (
 	<aside className="main-sidebar">
@@ -45,17 +49,17 @@ const AsideNav = ({ auth }) => {
 		<ul className="sidebar-menu" data-widget="tree">
 		  <li className="header">MENU</li>
 		  {/* Optionally, you can add icons to the links */}
-		  <li className="active">
+		  <li className={ activeLinks('/admin/dashboard') }>
 			<Link to="/admin/dashboard">
 			  <i className="fa fa-link"></i> <span>Dashboard</span>
 			</Link>
 		  </li>
-		  <li>
+		  <li className={ activeLinks('/admin/comics') }>
 			<Link to="/admin/comics">
 			  <i className="fa fa-link"></i> <span>Comic Lists</span>
 			</Link>
 		  </li>
-		  <li className="treeview">
+		  <li className={ ['treeview', activeLinks('/admin/genre')].join(' ') }>
 			<Link to="#"><i className="fa fa-link"></i> <span>Multilevel</span>
 			  <span className="pull-right-container">
 				  <i className="fa fa-angle-left pull-right"></i>
@@ -74,6 +78,8 @@ const AsideNav = ({ auth }) => {
   );
 }
 
-export default connect(
-  props => props
-)(AsideNav);
+export default withRouter(
+  connect(
+	props => props
+  )(AsideNav)
+);
