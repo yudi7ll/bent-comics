@@ -143,7 +143,7 @@ const NavRightMenu = ({ auth }) => {
 		  <ul className="dropdown-menu">
 			{/* The user image in the menu  */}
 			<li className="user-header">
-			  <img src="img/user2-160x160.jpg" className="img-circle" alt="User Image" />
+			  <img src={ '/img/' + data.picture } className="img-circle" alt={ data.name } />
 
 			  <p>
 				{ data.name }

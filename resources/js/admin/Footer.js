@@ -6,7 +6,7 @@ const Footer = () => {
 	  <div className="pull-right hidden-xs">
 		Bent Comics
 	  </div>
-	  <strong>Copyright &copy; 2019 <a href="#">Bent Comics</a>.</strong> All rights reserved.
+	  <strong>Copyright &copy; 2019 <a href="/">Bent Comics</a>.</strong> All rights reserved.
 	</footer>
   );
 }

@@ -11,7 +11,7 @@ Route::get('/', function() {
 });
 
 // Admin routes
-Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/admin/{path?}', 'AdminController@index')->where('path', '.*');
 
 Route::get('/logout', function() {
   \Auth::logout();

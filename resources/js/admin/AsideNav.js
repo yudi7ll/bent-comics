@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const AsideNav = ({ auth }) => {
@@ -13,12 +14,18 @@ const AsideNav = ({ auth }) => {
 		{/* Sidebar user panel (optional) */}
 		<div className="user-panel">
 		  <div className="pull-left image">
-			<img src={'/img/' + data.picture} className="img-circle" alt={data.name} />
+			<img
+			  src={ '/img/' + data.picture }
+			  className="img-circle"
+			  alt={ data.name }
+			/>
 		  </div>
 		  <div className="pull-left info">
 			<p>{ data.name }</p>
 			{/* Status */}
-			<a href="#"><i className="fa fa-circle text-success"></i> { data.email }</a>
+			<a href={'mailto:' + data.email }>
+			  <i className="fa fa-circle text-success"></i> { data.email }
+			</a>
 		  </div>
 		</div>
 
@@ -36,16 +43,24 @@ const AsideNav = ({ auth }) => {
 
 		{/* Sidebar Menu */}
 		<ul className="sidebar-menu" data-widget="tree">
-		  <li className="header">HEADER</li>
+		  <li className="header">MENU</li>
 		  {/* Optionally, you can add icons to the links */}
-		  <li className="active"><a href="#"><i className="fa fa-link"></i> <span>Link</span></a></li>
-		  <li><a href="#"><i className="fa fa-link"></i> <span>Another Link</span></a></li>
+		  <li className="active">
+			<Link to="/admin/dashboard">
+			  <i className="fa fa-link"></i> <span>Dashboard</span>
+			</Link>
+		  </li>
+		  <li>
+			<Link to="/admin/comics">
+			  <i className="fa fa-link"></i> <span>Comic Lists</span>
+			</Link>
+		  </li>
 		  <li className="treeview">
-			<a href="#"><i className="fa fa-link"></i> <span>Multilevel</span>
+			<Link to="#"><i className="fa fa-link"></i> <span>Multilevel</span>
 			  <span className="pull-right-container">
 				  <i className="fa fa-angle-left pull-right"></i>
 				</span>
-			</a>
+			</Link>
 			<ul className="treeview-menu">
 			  <li><a href="#">Link in level 2</a></li>
 			  <li><a href="#">Link in level 2</a></li>

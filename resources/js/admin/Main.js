@@ -1,39 +1,14 @@
 import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-const MainWrapper = ({ children }) => {
+import Dashboard from './components/Dashboard';
 
-  return (
-	<div className="content-wrapper">
-	  {/* Content Header (Page header) */}
-	  <section className="content-header">
-		<h1>
-		  Page Header
-		  <small>Optional description</small>
-		</h1>
-		<ol className="breadcrumb">
-		  <li><a href="#"><i className="fa fa-dashboard"></i> Level</a></li>
-		  <li className="active">Here</li>
-		</ol>
-	  </section>
-
-	  {/* Main content */}
-	  <section className="content container-fluid">
-
-		{ children }
-
-	  </section>
-	  {/* /.content */}
-	</div>
-  );
-}
-
-const Main = () => {
-  return (
-	<MainWrapper>
-	  <h1>Admin Panel</h1>
-	</MainWrapper>
-  );
-}
-
+const Main = () => (
+  <Switch>
+	<Route path="/admin/dashboard" component={Dashboard} />
+	<Route path="/admin/comics" />
+	<Redirect from="/" to="/admin/dashboard" />
+  </Switch>
+);
 
 export default Main;

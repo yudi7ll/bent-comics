@@ -16,18 +16,18 @@ class CreateRentedsTable extends Migration
     {
         Schema::create('renteds', function (Blueprint $table) {
             $table->bigIncrements('id');
-			$table->string('user_username');
+			$table->string('user_idktp');
 			$table->timestamp('deadline');
 			$table->boolean('is_returned')->default(0);
 			$table->timestamp('returned_at')->nullable();
 			$table->timestamp('rented_at')->default(Carbon::now());
 
 			$table
-			  ->foreign('user_username')
-			  ->references('username')
+			  ->foreign('user_idktp')
+			  ->references('idktp')
 			  ->on('users')
 			  ->onDelete('cascade');
-			$table->dropForeign('renteds_user_username_foreign');
+			$table->dropForeign('renteds_user_idktp_foreign');
         });
     }
 
