@@ -11,37 +11,41 @@
 	  <div class="form-group">
 		<label for="name" class="col-sm-3 control-label">Name</label>
 		<div class="col-sm-9">
-		  <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required value="{{old('name')}}">
+		  <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required value="{{old('name')}}" autofocus>
 		</div>
 	  </div>
-	  <div class="form-group">
+	  <div class="{{ join(" ", ['form-group', ($errors->has('idktp')) ? 'has-error' : '']) }}">
 		<label for="idktp" class="col-sm-3 control-label">ID. KTP</label>
 		<div class="col-sm-9">
 		  <input type="text" class="form-control" id="idktp" name="idktp" placeholder="Ex. 517101030XXXXXXX" required value="{{old('idktp')}}">
+		  <small class="text-danger">{{ $errors->first('idktp') }}</small>
 		</div>
 	  </div>
-	  <div class="form-group">
+	  <div class="{{ join(" ", ['form-group', ($errors->has('email')) ? 'has-error' : '']) }}">
 		<label for="email" class="col-sm-3 control-label">Email</label>
 		<div class="col-sm-9">
 		  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required value="{{old('email')}}">
+		  <small class="text-danger">{{ $errors->first('email') }}</small>
 		</div>
 	  </div>
-	  <div class="form-group">
+	  <div class="{{ join(" ", ['form-group', ($errors->has('password')) ? 'has-error' : '']) }}">
 		<label for="password" class="col-sm-3 control-label">Password</label>
 		<div class="col-sm-9">
 		  <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
 		</div>
 	  </div>
-	  <div class="form-group">
+	  <div class="{{ join(" ", ['form-group', ($errors->has('password')) ? 'has-error' : '']) }}">
 		<label for="password2" class="col-sm-3 control-label"></label>
 		<div class="col-sm-9">
 		  <input type="password" class="form-control" id="password2" name="password_confirmation" placeholder="Confirm Password" required>
+		  <small class="text-danger">{{ $errors->first('password') }}</small>
 		</div>
 	  </div>
-	  <div class="form-group">
+	  <div class="{{ join(" ", ['form-group', ($errors->has('birth_date')) ? 'has-error' : '']) }}">
 		<label for="birthdate" class="col-sm-3 control-label">Birth Date</label>
 		<div class="col-sm-9">
 		  <input type="date" class="form-control" id="birthdate" name="birth_date" required value="{{old('birth_date')}}">
+		  <small class="text-danger">{{ $errors->first('birth_date') }}</small>
 		</div>
 	  </div>
 	  <div class="form-group">

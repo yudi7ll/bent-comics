@@ -12,16 +12,18 @@
 	  <div class="form-group">
 		<h2 class="text-center"><b class="brand-name">Bent Comics</b></h2>
 	  </div>
-	  <div class="form-group">
+	  <div class="{{ join(" ", ['form-group', ($errors->has('email')) ? 'has-error' : '']) }}">
 		<label for="email" class="col-sm-3 control-label">Email</label>
 		<div class="col-sm-9">
-		  <input type="email" name="email" class="form-control" id="email" placeholder="Email" required value="{{ old('email') }}" />
+		  <input type="email" name="email" class="form-control" id="email" placeholder="Email" required value="{{ old('email') }}" autofocus />
+		  <small class="text-danger">{{ $errors->first('email') }}</small>
 		</div>
 	  </div>
-	  <div class="form-group">
+	  <div class="{{ join(" ", ['form-group', ($errors->has('password')) ? 'has-error' : '']) }}">
 		<label for="password" class="col-sm-3 control-label">Password</label>
 		<div class="col-sm-9">
 		  <input type="password" name="password" class="form-control" id="password" placeholder="Password" required />
+		  <small class="text-danger">{{ $errors->first('password') }}</small>
 		</div>
 	  </div>
 	  <div class="form-group">

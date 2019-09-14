@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const Nav = ({ auth }) => {
@@ -168,7 +169,7 @@ const NavRightMenu = ({ auth }) => {
 			{/* Menu Footer */}
 			<li className="user-footer">
 			  <div className="pull-left">
-				<a href="#" className="btn btn-default btn-flat">Profile</a>
+				<Link to="/admin/profile" className="btn btn-default btn-flat">Profile</Link>
 			  </div>
 			  <div className="pull-right">
 				<a href="/logout" className="btn btn-default btn-flat">Sign out</a>

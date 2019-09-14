@@ -1,20 +1,53 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
-import Dashboard from './main/Dashboard';
-import NotFound from './main/NotFound';
+import Dashboard from './pages/Dashboard';
+import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
 
-const Main = () => (
-  <Switch>
-	<Route path="/admin/dashboard" component={Dashboard} />
-	<Route path="/admin/comics" />
+const Main = ({ location }) => (
+  <MainWrapper
+	title={'test'}
+	location={location}
+  >
+	<Switch>
+	  <Route path="/admin/dashboard" component={Dashboard} />
+	  <Route path="/admin/comics" />
+	  <Route path="/admin/profile" component={Profile} />
 
-	<Route exact path="/admin" render={() => (
-	  <Redirect to="/admin/dashboard" />
-	)} />
+	  <Route exact path="/admin" render={() => (
+		<Redirect to="/admin/dashboard" />
+	  )} />
 
-	<Route component={NotFound} />
-  </Switch>
+	  <Route component={NotFound} />
+	</Switch>
+  </MainWrapper>
 );
 
-export default Main;
+const MainWrapper = ({ children, title, location }) => {
+
+  console.log(location.pathname.split('/').pop());
+
+  return (
+	<div className="content-wrapper">
+	  <section className="content-header">
+		<h1>
+		  { title }
+		  <small>Current status</small>
+		</h1>
+		<ol className="breadcrumb">
+		  <li><a href="#"><i className="fa fa-dashboard"></i> Level</a></li>
+		  <li className="active">Here</li>
+		</ol>
+	  </section>
+
+	  <section className="content container-fluid">
+
+		{ children }
+
+	  </section>
+	</div>
+  );
+}
+
+export default withRouter(Main);
