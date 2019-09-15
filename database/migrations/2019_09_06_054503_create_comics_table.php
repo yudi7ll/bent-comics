@@ -20,7 +20,7 @@ class CreateComicsTable extends Migration
 			$table->string('author');
 			$table->string('publisher');
 			$table->string('genre');
-			$table->string('description');
+			$table->text('description');
             $table->timestamps();
 			$table->index(['title', 'author', 'publisher', 'genre']);
         });

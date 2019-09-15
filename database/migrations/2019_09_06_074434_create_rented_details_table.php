@@ -18,7 +18,7 @@ class CreateRentedDetailsTable extends Migration
 			$table->unsignedBigInteger('rented_id');
 			$table->unsignedBigInteger('comic_id');
 			$table->boolean('is_returned')->default(0);
-			$table->timestamp('returned_at');
+			$table->timestamp('returned_at')->nullable();
             $table->timestamps();
 
 			$table
