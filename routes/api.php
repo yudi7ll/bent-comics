@@ -11,7 +11,7 @@ Route::middleware('auth:api')->group(function() {
   Route::get('/rent', 'RentedController@get'); // get all data
   Route::get('/rent/{id}', 'RentedController@getOne'); // get one data
   Route::post('/rent', 'RentedController@store');
-  Route::put('/rent', 'RentedController@update');
+  Route::put('/rent/{id}', 'RentedController@update');
   Route::delete('/rent', 'RentedController@destroy');
 
 });

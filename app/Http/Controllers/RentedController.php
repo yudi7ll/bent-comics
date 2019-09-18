@@ -41,11 +41,14 @@ class RentedController extends Controller
    */
   public function store(Request $request)
   {
+	// store into Rented
+	// var_dump('idktp '.$request->user());
 	$rentedId = $this->rented->insertGetId([
 	  'user_idktp' => \Auth::user()->idktp,
 	  'deadline' => $request->deadline
 	]);
 
+	// store into RentedDetails belongsTo Rented
 	foreach ($request->comic_id as $comic_id) {
 	  $this->rentedDetails->insert([
 		'rented_id' => $rentedId,
@@ -53,7 +56,7 @@ class RentedController extends Controller
 	  ]);
 	}
 
-	return response($rentedId);
+	return response('Data Saved Successfully', 200);
   }
 
   /**
@@ -63,20 +66,20 @@ class RentedController extends Controller
    * @param  \App\Rented  $rented
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request)
+  public function update(Request $request, $id)
   {
 	try {
 
 	  $this
 		->rented
-		->find($request->id)
+		->find($id)
 		->update($request->all());
 
 	} catch (\Exception  $exception) {
 	  return $exception->getMessage();
 	}
 
-	return response('Update successfully', 200);
+	return response('Update Successfully', 200);
   }
 
   /**

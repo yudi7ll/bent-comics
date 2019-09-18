@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 
@@ -13,25 +12,47 @@ class RentingTest extends TestCase
 
   public function testRentingOneProduct()
   {
-	$comic = factory(\App\Comic::class)->create();
 	$user = factory(\App\User::class)->create();
+	$comic = factory(\App\Comic::class, 3)->create();
 
-
-	// session
+	// session login
 	$this->actingAs($user, 'api');
 
 	$response = $this->json('POST', '/api/rent', [
-	  'user_idktp' => $user->first('idktp'),
-	  'deadline' => Carbon::now()->addDay(2),
-	  'comic_id' => $comic->id,
+	  'deadline' => Carbon::now()->addDay()->toDateTimeString(),
+	  'comic_id' => $comic->map(function($c) {
+		// return only the id
+		return $c->id;
+	  })
 	]);
 
 	$response
-	  ->assertStatus(200);
+	  ->assertStatus(200)
+	  ->assertSee('Successfully');
 
-	$this->assertDatabaseHas('comics', [
-	  'user_idktp' => $user->first('idktp'),
-	  'comic_id' => $comic->id
+	$this->assertDatabaseHas('renteds', [
+	  'is_returned' => 0
+	]);
+  }
+
+  public function testUpdateRentedComic()
+  {
+	$user = factory(\App\User::class)->create();
+	$rented = factory(\App\Rented::class)->create();
+
+	$this->actingAs($user, 'api');
+
+	$response = $this->json('PUT', '/api/rent/'.$rented->id, [
+	  'is_returned' => 1,
+	  'returned_at' => Carbon::now()->toDateTimeString()
+	]);
+
+	$response
+	  ->assertStatus(200)
+	  ->assertSee('Successfully');
+
+	$this->assertDatabaseHas('renteds', [
+	  'is_returned' => 1
 	]);
   }
 }
