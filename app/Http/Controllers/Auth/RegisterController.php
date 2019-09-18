@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
 			'birth_date' => ['required', 'date'],
+			'level' => ['required', 'integer']
         ]);
     }
 
@@ -70,7 +71,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
 			'idktp' => $data['idktp'],
             'email' => $data['email'],
-			'level' => 3,
+			'level' => $data['level'],
             'password' => Hash::make($data['password']),
 			'birth_date' => $data['birth_date'],
 			'api_token' => Str::random(60),

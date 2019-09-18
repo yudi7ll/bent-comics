@@ -3,83 +3,98 @@
 namespace App\Http\Controllers;
 
 use App\Rented;
+use App\RentedDetails;
 use Illuminate\Http\Request;
 
 class RentedController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+  private $rented;
+  private $rentedDetails;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  public function __construct(Rented $rented, RentedDetails $rentedDetails)
+  {
+	$this->rented = $rented;
+	$this->rentedDetails = $rentedDetails;
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  /*
+   * @return [array] All Data
+   */
+  public function get()
+  {
+	return $this->rented->all();
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Rented  $rented
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Rented $rented)
-    {
-        //
-    }
+  /*
+   * @return [object] One data
+   */
+  public function getOne($id)
+  {
+	return $this->rented->find($id);
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Rented  $rented
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Rented $rented)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return $rentedId
+   */
+  public function store(Request $request)
+  {
+	$rentedId = $this->rented->insertGetId([
+	  'user_idktp' => \Auth::user()->idktp,
+	  'deadline' => $request->deadline
+	]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Rented  $rented
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Rented $rented)
-    {
-        //
-    }
+	foreach ($request->comic_id as $comic_id) {
+	  $this->rentedDetails->insert([
+		'rented_id' => $rentedId,
+		'comic_id' => $comic_id
+	  ]);
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Rented  $rented
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Rented $rented)
-    {
-        //
-    }
+	return response($rentedId);
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  \App\Rented  $rented
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request)
+  {
+	try {
+
+	  $this
+		->rented
+		->find($request->id)
+		->update($request->all());
+
+	} catch (\Exception  $exception) {
+	  return $exception->getMessage();
+	}
+
+	return response('Update successfully', 200);
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  \App\Rented  $rented
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(Request $request)
+  {
+	try {
+
+	  $this->rented->findOrFail($request->id)->delete();
+
+	} catch (\Exception  $exception) {
+	  return $exception->getMessage();
+	}
+
+	return response('Successfully Deleted!', 200);
+  }
 }
