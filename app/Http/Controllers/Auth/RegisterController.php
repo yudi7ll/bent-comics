@@ -49,14 +49,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-			'idktp' => ['required', 'string', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-			'birth_date' => ['required', 'date'],
-			'level' => ['required', 'integer']
-        ]);
+	  return Validator::make($data, [
+		'name' => ['required', 'string', 'max:255'],
+		'idktp' => ['required', 'string', 'unique:users'],
+		'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+		'password' => ['required', 'string', 'min:8', 'confirmed'],
+		'birth_date' => ['required', 'date'],
+		'level' => ['integer', 'max:1']
+	  ]);
     }
 
     /**
@@ -67,14 +67,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-			'idktp' => $data['idktp'],
-            'email' => $data['email'],
-			'level' => $data['level'],
-            'password' => Hash::make($data['password']),
-			'birth_date' => $data['birth_date'],
-			'api_token' => Str::random(60),
-        ]);
+	  return User::create([
+		'name' => $data['name'],
+		'idktp' => $data['idktp'],
+		'email' => $data['email'],
+		'level' => (isset($data['level'])) ? $data['level'] : 3,
+		'password' => Hash::make($data['password']),
+		'birth_date' => $data['birth_date'],
+		'api_token' => Str::random(60),
+	  ]);
     }
 }

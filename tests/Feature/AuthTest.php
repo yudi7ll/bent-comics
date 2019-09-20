@@ -29,7 +29,7 @@ class AuthTest extends TestCase
 	  ->assertRedirect('/');
 	
 
-	// !! password row will be encrypted
+	// !! password row will be deleted
 	unset($newUser['password']);
 	unset($newUser['password_confirmation']);
 
