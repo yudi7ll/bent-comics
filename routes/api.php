@@ -6,6 +6,8 @@ Route::middleware('auth:api')->group(function() {
   Route::get('/user', function (Request $request) {
 	return $request->user();
   });
+  Route::get('/user/check/{key}', 'ProfileController@check');
+  Route::put('/user', 'ProfileController@update');
 
   // Rented
   Route::get('/rent', 'RentedController@get'); // get all data

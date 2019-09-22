@@ -10,7 +10,7 @@ const AsideNav = ({ auth, location }) => {
   }
 
   return (
-	<aside className="main-sidebar">
+	<aside className="main-sidebar" style={{ position: 'fixed' }}>
 
 	  {/* sidebar: style can be found in sidebar.less */}
 	  <section className="sidebar">
@@ -51,7 +51,7 @@ const AsideNav = ({ auth, location }) => {
 		  {/* Optionally, you can add icons to the links */}
 		  <li className={ activeLinks('/admin/dashboard') }>
 			<Link to="/admin/dashboard">
-			  <i className="fa fa-link"></i> <span>Dashboard</span>
+			  <i className="fa fa-tachometer" aria-hidden="true"></i> <span>Dashboard</span>
 			</Link>
 		  </li>
 		  <li className={ activeLinks('/admin/comics') }>
@@ -69,6 +69,17 @@ const AsideNav = ({ auth, location }) => {
 			  <li><a href="#">Link in level 2</a></li>
 			  <li><a href="#">Link in level 2</a></li>
 			</ul>
+		  </li>
+		  <li className="header">ACCOUNT</li>
+		  <li className={ activeLinks('/admin/profile') }>
+			<Link to="/admin/profile">
+			  <i className="fa fa-user"></i> <span>Profile</span>
+			</Link>
+		  </li>
+		  <li>
+			<a href="/logout">
+			  <i className="fa fa-sign-out"></i> <span>Logout</span>
+			</a>
 		  </li>
 		</ul>
 		{/* /.sidebar-menu */}

@@ -5,24 +5,26 @@ import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 
-const Main = ({ location }) => (
-  <MainWrapper
-	title={'test'}
-	location={location}
-  >
-	<Switch>
-	  <Route path="/admin/dashboard" component={Dashboard} />
-	  <Route path="/admin/comics" />
-	  <Route path="/admin/profile" component={Profile} />
+const Main = ({ location }) => {
+  return (
+	<MainWrapper
+	  title={ location.pathname.split('/').pop() }
+	  location={ location }
+	>
+	  <Switch>
+		<Route path="/admin/dashboard" component={Dashboard} />
+		<Route path="/admin/comics" />
+		<Route path="/admin/profile" component={Profile} />
 
-	  <Route exact path="/admin" render={() => (
-		<Redirect to="/admin/dashboard" />
-	  )} />
+		<Route exact path="/admin" render={() => (
+		  <Redirect to="/admin/dashboard" />
+		)} />
 
-	  <Route component={NotFound} />
-	</Switch>
-  </MainWrapper>
-);
+		<Route component={NotFound} />
+	  </Switch>
+	</MainWrapper>
+  );
+}
 
 const MainWrapper = ({ children, title, location }) => {
 
@@ -31,7 +33,11 @@ const MainWrapper = ({ children, title, location }) => {
   return (
 	<div className="content-wrapper">
 	  <section className="content-header">
-		<h1>
+		<h1
+		  style={{
+			textTransform: 'capitalize'
+		  }}
+		>
 		  { title }
 		  <small>Current status</small>
 		</h1>
@@ -41,7 +47,12 @@ const MainWrapper = ({ children, title, location }) => {
 		</ol>
 	  </section>
 
-	  <section className="content container-fluid">
+	  <section
+		className="content container-fluid"
+		style={{
+		  marginTop: '1rem'
+		}}
+	  >
 
 		{ children }
 
