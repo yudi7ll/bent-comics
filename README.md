@@ -9,7 +9,7 @@ composer install && npm install
 
 ### Usage
 ```
-npm start
+npm run fresh && npm start
 ```
 
 ## Author
