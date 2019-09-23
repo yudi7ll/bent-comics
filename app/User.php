@@ -49,21 +49,21 @@ class User extends Authenticatable
 
 	public function Rented()
 	{
-	  return $this->hasMany(\App\Rented::class, 'user_idktp');
+	  return $this->hasMany(\App\Rented::class);
 	}
 
 	public function updateValidate($request)
 	{
 	   return \Validator::make($request->all(), [
+		'idktp' => [
+		   'digits:16',
+		   Rule::unique('users')->ignore(\Auth::user())
+		 ],
 		 'email' => [
 		   'string',
 		   Rule::unique('users')->ignore(\Auth::user())
 		 ],
-		'idktp' => [
-		   'string',
-		   Rule::unique('users')->ignore(\Auth::user())
-		 ],
-		'birth_date' => 'date'
+		 'birth_date' => 'date',
 	  ]);
 	}
 }

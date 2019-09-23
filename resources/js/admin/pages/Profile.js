@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const Profile = ({ auth }) => {
   const { data, isLoading, fetchFail } = auth;
 
+  // LOADING SCREEN
   if (isLoading) {
 	return (
 	  <h2>Loading ...</h2>
 	);
   }
 
+  // ERROR SCREEN
   if (fetchFail) {
 	return (
 	  <h4 className="text-danger">
@@ -49,14 +52,15 @@ const Form = ({ data }) => {
   // Input Form
   let idktp,
 	email,
-	birth_date;
+	birth_date,
+	picture;
+
   const [isDisabled, setIsDisabled] = useState(true);
   const [errors, setErrors] = useState({
 	idktp: null,
 	email: null,
 	birth_date: null
   });
-
   const submitHandler = async e => {
 	e.preventDefault();
 
@@ -71,7 +75,7 @@ const Form = ({ data }) => {
 	if (typeof resp.data == 'object'
 	  && resp.data !== true
 	) {
-	  return setErrors(Object.assign({}, errors, resp.data));
+	  return setErrors(resp.data);
 	}
 
 	alert('Data Saved Successfully!');
@@ -80,13 +84,21 @@ const Form = ({ data }) => {
 
   const pictureHandler = e => {
 	e.preventDefault();
-	console.log('Picture Upload');
+	axios.put('/api/user/picture?api_token=' + _apiToken.params.api_token, {
+	  picture: picture.value
+	}, {
+	  headers: {
+		'Content-Type': 'image/jpg'
+	  }
+	})
+	  .then(resp => console.log('resp picture', resp));
   }
 
   return (
 	<>
 	<div className="col-sm-5">
 	  <form
+		encType="multipart/form-data"
 		style={{
 		  borderRight: '1px solid #999',
 		  paddingRight: '1.5rem'
@@ -172,16 +184,37 @@ const Form = ({ data }) => {
 	  />
 	  <div className="form-group">
 		<label htmlFor="profile-picture">Upload Picture</label>
-		  <input
-			type="file"
-			id="profile-picture"
-			onChange={pictureHandler}
-		  />
+		  <form
+			action="/"
+			onSubmit={pictureHandler}
+		  >
+			<input
+			  type="file"
+			  id="profile-picture"
+			  required={true}
+			  ref={e => picture = e}
+			/>
+			<button
+			  type="submit"
+			  className="btn btn-primary"
+			  style={{
+				marginTop: '1rem'
+			  }}
+			  title="Upload Selected Image"
+			>
+			  <i className="fa fa-upload"></i>&nbsp;
+			  Upload
+			</button>
+		  </form>
 		<p className="help-block">Change your profile picture.</p>
 	  </div>
 	</div>
 	</>
   );
+}
+
+Profile.propTypes = {
+  auth: PropTypes.object,
 }
 
 export default connect(

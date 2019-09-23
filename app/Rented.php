@@ -19,7 +19,7 @@ class Rented extends Model
 
   public function User()
   {
-	return $this->belongsTo(\App\User::class, 'user_idktp');
+	return $this->belongsTo(\App\User::class);
   }
 
   public function Comic()

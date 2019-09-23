@@ -44,17 +44,24 @@ class RentedController extends Controller
 	// store into Rented
 	// var_dump('idktp '.$request->user());
 	$rentedId = $this->rented->insertGetId([
-	  'user_idktp' => \Auth::user()->idktp,
+	  'user_id' => \Auth::user()->idktp,
 	  'deadline' => $request->deadline
 	]);
 
-	// store into RentedDetails belongsTo Rented
 	foreach ($request->comic_id as $comic_id) {
-	  $this->rentedDetails->insert([
+	  $this->rented->RentedDetails()->insert([
 		'rented_id' => $rentedId,
 		'comic_id' => $comic_id
 	  ]);
 	}
+
+	// store into RentedDetails belongsTo Rented
+	// foreach ($request->comic_id as $comic_id) {
+	//   $this->rentedDetails->insert([
+	// 	'rented_id' => $rentedId,
+	// 	'comic_id' => $comic_id
+	//   ]);
+	// }
 
 	return response('Data Saved Successfully', 200);
   }

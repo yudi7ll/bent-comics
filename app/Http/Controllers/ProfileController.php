@@ -23,7 +23,18 @@ class ProfileController extends Controller
 	  return response()->json($validate->messages());
 	}
 
-	return response()
+	$update = response()
 	  ->json(\Auth::user()->update($request->all()));
+
+	if (!$update) {
+	  return response('Update Failed', 400);
+	}
+
+	return response('Profile Updated Successfully', 200);
+  }
+
+  public function updatePicture(Request $request)
+  {
+	return response()->json($request);
   }
 }

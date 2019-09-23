@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
 	  DB::table('users')->insert([
 		'name' => 'admin',
 		'email' => 'admin@admin.com',
-		'idktp' => '123123123',
+		'idktp' => '1234567812345678',
 		'level' => 1,
 		'password' => Hash::make('password'),
 		'picture' => 'admin_cover.jpg',
