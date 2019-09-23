@@ -49,7 +49,7 @@ class User extends Authenticatable
 
 	public function Rented()
 	{
-	  return $this->hasMany(\App\Rented::class, 'user_idktp');
+	  return $this->hasMany(\App\Rented::class);
 	}
 
 	public function updateValidate($request)

@@ -10,7 +10,7 @@ $factory->define(Rented::class, function (Faker $faker) {
   $idktp = (new \App\User)->limit(1)->first() ?: 123123123;
 
   return [
-	'user_idktp' => $idktp,
+	'user_id' => $idktp,
 	'deadline' => \Illuminate\Support\Carbon::now()->addDay()->toDateTimeString()
   ];
 });
