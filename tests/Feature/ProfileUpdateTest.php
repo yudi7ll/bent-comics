@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 
@@ -17,9 +16,8 @@ class ProfileUpdateTest extends TestCase
 
 	$this->actingAs($user, 'api');
 
-	$newEmail = 'newemail@new.com';
 	$response = $this->json('PUT', '/api/user', [
-	  'email' => $newEmail,
+	  'email' => 'newemail@new.com',
 	  'birth_date' => Carbon::parse('1999-03-10')->toDateTimeString()
 	]);
 

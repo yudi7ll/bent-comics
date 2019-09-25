@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Rented;
-use App\RentedDetails;
 use Illuminate\Http\Request;
 
 class RentedController extends Controller
 {
   private $rented;
-  private $rentedDetails;
 
-  public function __construct(Rented $rented, RentedDetails $rentedDetails)
+  public function __construct(Rented $rented)
   {
 	$this->rented = $rented;
-	$this->rentedDetails = $rentedDetails;
   }
 
   /*
@@ -42,7 +39,6 @@ class RentedController extends Controller
   public function store(Request $request)
   {
 	// store into Rented
-	// var_dump('idktp '.$request->user());
 	$rentedId = $this->rented->insertGetId([
 	  'user_id' => \Auth::user()->idktp,
 	  'deadline' => $request->deadline
@@ -54,14 +50,6 @@ class RentedController extends Controller
 		'comic_id' => $comic_id
 	  ]);
 	}
-
-	// store into RentedDetails belongsTo Rented
-	// foreach ($request->comic_id as $comic_id) {
-	//   $this->rentedDetails->insert([
-	// 	'rented_id' => $rentedId,
-	// 	'comic_id' => $comic_id
-	//   ]);
-	// }
 
 	return response('Data Saved Successfully', 200);
   }
