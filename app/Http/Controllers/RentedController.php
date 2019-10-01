@@ -38,7 +38,7 @@ class RentedController extends Controller
    */
   public function store(Request $request)
   {
-	// store into Rented
+  	//insert new data & return the id
 	$rentedId = $this->rented->insertGetId([
 	  'user_id' => \Auth::user()->idktp,
 	  'deadline' => $request->deadline

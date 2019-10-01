@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -50,20 +51,5 @@ class User extends Authenticatable
 	public function Rented()
 	{
 	  return $this->hasMany(\App\Rented::class);
-	}
-
-	public function updateValidate($request)
-	{
-	   return \Validator::make($request->all(), [
-		'idktp' => [
-		   'digits:16',
-		   Rule::unique('users')->ignore(\Auth::user())
-		 ],
-		 'email' => [
-		   'string',
-		   Rule::unique('users')->ignore(\Auth::user())
-		 ],
-		 'birth_date' => 'date',
-	  ]);
 	}
 }

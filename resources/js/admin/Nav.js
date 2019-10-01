@@ -3,31 +3,31 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const Nav = ({ auth }) => {
-  
-  return (
-	<header className="main-header">
-	  {/* logo */}
-	  <a href="/admin" className="logo">
-		{/* mini logo for sidebar mini 50x50 pixels */}
-		<span className="logo-mini"><b>BC</b></span>
-		{/* logo for regular state and mobile devices */}
-		<span className="logo-lg"><b>Bent</b> Comics</span>
-	  </a>
 
-	  {/* Header Navbar  */}
-	  <nav className="navbar navbar-static-top" role="navigation">
-		{/* Sidebar toggle button */}
-		<a href="#" className="sidebar-toggle" data-toggle="push-menu" role="button">
-		  <span className="sr-only">Toggle navigation</span>
-		</a>
+    return (
+        <header className="main-header">
+            {/* logo */}
+            <a href="/admin" className="logo">
+                {/* mini logo for sidebar mini 50x50 pixels */}
+                <span className="logo-mini"><b>BC</b></span>
+                {/* logo for regular state and mobile devices */}
+                <span className="logo-lg"><b>Bent</b> Comics</span>
+            </a>
 
-		<NavRightMenu
-		  auth={ auth }
-		/>
+            {/* Header Navbar  */}
+            <nav className="navbar navbar-static-top" role="navigation">
+                {/* Sidebar toggle button */}
+                <a href="#" className="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span className="sr-only">Toggle navigation</span>
+                </a>
 
-	  </nav>
-	</header>
-  );
+                <NavRightMenu
+                    auth={ auth }
+                />
+
+            </nav>
+        </header>
+    );
 }
 
 const NavRightMenu = ({ auth }) => {
@@ -52,7 +52,7 @@ const NavRightMenu = ({ auth }) => {
 				  <a href="#">
 					<div className="pull-left">
 					  {/* User Image  */}
-					  <img src={'/img/' + data.picture } className="img-circle" alt={data.name} />
+                        <img src={'/storage/img/' + data.picture } className="img-circle" alt={data.name} />
 					</div>
 					{/* Message title and timestamp  */}
 					<h4>
@@ -137,14 +137,14 @@ const NavRightMenu = ({ auth }) => {
 		  {/* Menu Toggle Button  */}
 		  <a href="#" className="dropdown-toggle" data-toggle="dropdown">
 			{/* The user image in the navbar */}
-			<img src={ '/img/' + data.picture } className="user-image" alt={ data.name } />
+              <img src={ '/storage/img/' + data.picture } className="user-image" alt={ data.name } />
 			{/* hidden-xs hides the username on small devices so only the image appears.  */}
 			<span className="hidden-xs">{ data.name }</span>
 		  </a>
 		  <ul className="dropdown-menu">
 			{/* The user image in the menu  */}
 			<li className="user-header">
-			  <img src={ '/img/' + data.picture } className="img-circle" alt={ data.name } />
+                <img src={ '/storage/img/' + data.picture } className="img-circle" alt={ data.name } />
 
 			  <p>
 				{ data.name }

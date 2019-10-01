@@ -19,5 +19,6 @@ $factory->define(Comic::class, function (Faker $faker) {
 	'publisher' => $faker->company,
 	'genre' => $genre[$faker->numberBetween(0, 3)],
 	'description' => $faker->sentence(20),
+	'rent_price' => $faker->numberBetween(5, 100) . '000',
   ];
 });

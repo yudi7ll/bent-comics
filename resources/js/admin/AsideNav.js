@@ -19,7 +19,7 @@ const AsideNav = ({ auth, location }) => {
 		<div className="user-panel">
 		  <div className="pull-left image">
 			<img
-			  src={ '/img/' + data.picture }
+                src={ '/storage/img/' + data.picture }
 			  className="img-circle"
 			  alt={ data.name }
 			/>

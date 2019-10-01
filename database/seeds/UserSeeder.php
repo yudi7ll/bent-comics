@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
 		'idktp' => '1234567812345678',
 		'level' => 1,
 		'password' => Hash::make('password'),
-		'picture' => 'admin_cover.jpg',
+		'picture' => 'default.png',
 		'birth_date' => '1999-10-03',
 		'created_at' => Carbon::now(),
 		'updated_at' => Carbon::now(),

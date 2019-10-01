@@ -8,7 +8,7 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "start": "concurrently \"npm run watch\" \"php artisan serve --host 0.0.0.0 --port 3000\"",
+        "start": "concurrently \"npm run watch-poll\" \"php artisan serve --port 3000\"",
         "fresh": "composer run migrate"
     },
     "devDependencies": {
@@ -16,7 +16,7 @@
         "axios": "^0.19",
         "cross-env": "^5.1",
         "jquery": "^3.2",
-        "laravel-mix": "^4.0.7",
+        "laravel-mix": "^4.1.4",
         "lodash": "^4.17.13",
         "popper.js": "^1.12",
         "react": "^16.2.0",
@@ -34,8 +34,9 @@
         "prop-types": "^15.7.2",
         "react-chartjs-2": "^2.8.0",
         "react-redux": "^7.1.1",
-        "react-router-dom": "^5.0.1",
+        "react-router-dom": "^5.1.0",
         "redux": "^4.0.4",
+        "redux-form": "^8.2.6",
         "redux-thunk": "^2.3.0"
     }
 }

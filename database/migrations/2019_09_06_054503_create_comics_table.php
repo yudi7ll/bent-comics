@@ -21,6 +21,7 @@ class CreateComicsTable extends Migration
 			$table->string('publisher');
 			$table->string('genre');
 			$table->text('description');
+			$table->string('rent_price');
             $table->timestamps();
 			$table->index(['title', 'author', 'publisher', 'genre']);
         });

@@ -2,39 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 
 class ProfileController extends Controller
 {
-  private $user;
+    private $user;
 
-  public function __construct(User $user)
-  {
-	$this->user = $user;
-  }
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
 
-  public function update(Request $request)
-  {
-	// validate request
-	$validate = $this->user->updateValidate($request);
+    public function update(ProfileUpdateRequest $request)
+    {
+        // dd($request->all());
+        \Auth::user()->update($request->validated());
 
-	if ($validate->fails()) {
-	  return response()->json($validate->messages());
-	}
+        return response('Profile Updated Successfully', 200);
+    }
 
-	$update = response()
-	  ->json(\Auth::user()->update($request->all()));
+    public function updatePicture(ProfileUpdateRequest $request)
+    {
+        $auth = \Auth::user();
+        $fileExt = '.'.$request->file('picture')->getClientOriginalExtension();
+        $fileName = $auth->idktp;
 
-	if (!$update) {
-	  return response('Update Failed', 400);
-	}
+        if ($auth->picture != 'default.png') {
+            // delete previous file
+            Storage::delete('/public/img/' . $auth->picture);
+        }
 
-	return response('Profile Updated Successfully', 200);
-  }
+        // store as a new name
+        $request
+            ->file('picture')
+            ->storePubliclyAs('/public/img', $fileName.$fileExt);
 
-  public function updatePicture(Request $request)
-  {
-	return response()->json($request);
-  }
+        // update filename on database
+        $auth->update([
+            'picture' => $fileName.$fileExt
+        ]);
+
+        return response('File Uploaded Successfully', 200);
+    }
 }

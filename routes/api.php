@@ -7,7 +7,7 @@ Route::middleware('auth:api')->group(function() {
 	return $request->user();
   });
   Route::put('/user', 'ProfileController@update');
-  Route::put('/user/picture', 'ProfileController@updatePicture');
+  Route::post('/user/picture', 'ProfileController@updatePicture');
 
   // Rented
   Route::get('/rent', 'RentedController@get'); // get all data
