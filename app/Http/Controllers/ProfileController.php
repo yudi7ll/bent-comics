@@ -29,6 +29,8 @@ class ProfileController extends Controller
         $fileExt = '.'.$request->file('picture')->getClientOriginalExtension();
         $fileName = $auth->idktp;
 
+        // if the photo is not default.png
+        // delete the photo
         if ($auth->picture != 'default.png') {
             // delete previous file
             Storage::delete('/public/img/' . $auth->picture);

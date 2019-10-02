@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
@@ -24,8 +25,12 @@ class ProfileUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'idktp' => 'digits:16',
-             'email' => 'string',
+            'idktp' => ['digits:16',
+                Rule::unique('users')->ignore(\Auth::user())
+            ],
+            'email' => ['string',
+                Rule::unique('users')->ignore(\Auth::user())
+            ],
              'birth_date' => 'date',
              'picture' => 'image',
         ];

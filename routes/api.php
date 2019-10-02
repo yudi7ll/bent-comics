@@ -17,9 +17,3 @@ Route::middleware('auth:api')->group(function() {
   Route::delete('/rent', 'RentedController@destroy');
 
 });
-
-
-// for testing
-Route::get('/api_token', function(Request $request) {
-  return response()->json(\App\User::where('email', $request->email)->first('api_token'));
-});
