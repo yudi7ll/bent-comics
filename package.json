@@ -29,6 +29,7 @@
         "bootstrap": "^3.4.1",
         "chart.js": "^2.8.0",
         "concurrently": "^4.1.2",
+        "croppie": "^2.6.4",
         "font-awesome": "^4.7.0",
         "ionicons": "^4.6.3",
         "prop-types": "^15.7.2",

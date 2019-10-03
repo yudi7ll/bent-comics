@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
+import Croppie from 'croppie';
 import PropTypes from 'prop-types';
 
 const Profile = ({ auth }) => {
@@ -208,6 +209,12 @@ const ProfilePictureForm = () => {
             });
     }
 
+    const chooseFileOnChange = e => {
+        setError(null);
+
+        debugger;
+    }
+
     return (
         <form
             encType="multipart/form-data"
@@ -219,7 +226,7 @@ const ProfilePictureForm = () => {
                 type="file"
                 name="picture"
                 required={true}
-                onChange={() => setError(null)}
+                onChange={chooseFileOnChange}
             />
             <button
                 type="submit"

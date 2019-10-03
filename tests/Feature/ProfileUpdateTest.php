@@ -26,16 +26,19 @@ class ProfileUpdateTest extends TestCase
 
     public function testUpdateProfilePicture()
     {
-        Storage::fake('test');
+        Storage::fake('img');
 
         $user = factory(\App\User::class)->create();
-        $file = UploadedFile::fake()->create('test.jpg')->size(100);
 
         $this->actingAs($user, 'api');
 
         $response = $this->json('POST', '/api/user/picture', [
-            'picture' => $file
+            UploadedFile::fake()->image('test.jpg')->size(100)
         ]);
+
+
+        // assert
+        Storage::disk('img')->assertExists('test.jpg');
 
         $response
             ->assertSuccessful()

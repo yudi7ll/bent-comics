@@ -30,7 +30,7 @@ class ProfileController extends Controller
         $fileName = $auth->idktp;
 
         // if the photo is not default.png
-        // delete the photo
+        // then delete the photo
         if ($auth->picture != 'default.png') {
             // delete previous file
             Storage::delete('/public/img/' . $auth->picture);
