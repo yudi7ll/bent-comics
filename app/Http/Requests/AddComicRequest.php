@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ComicRequest extends FormRequest
+class AddComicRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,8 +29,8 @@ class ComicRequest extends FormRequest
             'author' => 'required|string',
             'publisher' => 'required|string',
             'genre' => 'required|string',
-            'description' => 'required|string',
-            'rent_price' => 'required|integer',
+            'description' => 'string',
+            'rent_price' => 'required|integer'
         ];
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Comic;
-use App\Http\Requests\ComicRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\AddComicRequest;
+use App\Http\Requests\UpdateComicRequest;
 
 class ComicController extends Controller
 {
@@ -21,11 +21,20 @@ class ComicController extends Controller
      */
     public function index()
     {
-        //
+        return $this->comic->all();
     }
 
-    public function store(ComicRequest $request)
+    public function store(AddComicRequest $request)
     {
+        $lowerCasedAuthor = str_replace(' ', '', $request->author);
+        $lowerCasedTitle = str_replace(' ', '', $request->title);
+        $filename = $lowerCasedAuthor . '_' . $lowerCasedTitle;
+        $fileExt = '.'.$request->file('cover')->getClientOriginalExtension();
+
+        $request
+            ->file('cover')
+            ->storeAs('/public/img', $filename . $fileExt);
+
         $this->comic->insert($request->all());
 
         return response('Data Has Been Saved Successfully', 200);
@@ -39,7 +48,7 @@ class ComicController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->comic->findOrFail($id)->toArray();
     }
 
     /**
@@ -49,9 +58,11 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateComicRequest $request, $id)
     {
-        //
+        $this->comic->findOrFail($id)->update($request->all());
+
+        return response('Data has Been Updated Successfully', 200);
     }
 
     /**
@@ -62,6 +73,10 @@ class ComicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!$this->comic->findOrFail($id)->delete()) {
+            return response('Delete Failed!', 400);
+        }
+
+        return response('Data Deleted Successfully', 200);
     }
 }
