@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\ProfilePictureUpdateRequest;
 use Illuminate\Support\Facades\Storage;
 use App\User;
 
@@ -17,13 +18,15 @@ class ProfileController extends Controller
 
     public function update(ProfileUpdateRequest $request)
     {
-        // dd($request->all());
         \Auth::user()->update($request->validated());
 
         return response('Profile Updated Successfully', 200);
     }
 
-    public function updatePicture(ProfileUpdateRequest $request)
+    /*
+     * @param Request [file]
+     */
+    public function updatePicture(ProfilePictureUpdateRequest $request)
     {
         $auth = \Auth::user();
         $fileExt = '.'.$request->file('picture')->getClientOriginalExtension();
@@ -39,7 +42,7 @@ class ProfileController extends Controller
         // store as a new name
         $request
             ->file('picture')
-            ->storePubliclyAs('/public/img', $fileName.$fileExt);
+            ->storeAs('/public/img', $fileName.$fileExt);
 
         // update filename on database
         $auth->update([
@@ -47,5 +50,20 @@ class ProfileController extends Controller
         ]);
 
         return response('File Uploaded Successfully', 200);
+    }
+
+    public function deleteProfilePicture()
+    {
+        $auth = \Auth::user();
+
+        if ($auth->picture != 'default.png') {
+            // delete previous file
+            Storage::delete('/public/img/' . $auth->picture);
+        }
+
+        $auth->picture = 'default.png';
+        $auth->save();
+
+        return response('Profile Picture Has Been Deleted Successfully', 200);
     }
 }

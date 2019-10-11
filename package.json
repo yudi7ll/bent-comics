@@ -8,7 +8,7 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "start": "concurrently \"npm run watch-poll\" \"php artisan serve --port 3000\"",
+        "start": "concurrently \"npm run watch-poll -- --no-progress\" \"php artisan serve --port 3000 --host 0.0.0.0\" -c green,red",
         "fresh": "composer run migrate"
     },
     "devDependencies": {

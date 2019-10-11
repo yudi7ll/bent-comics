@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
 	  DB::table('users')->insert([
 		'name' => 'admin',
 		'email' => 'admin@admin.com',
-		'idktp' => '1234567812345678',
+		'idktp' => '1234567812345678', // 16 characters
 		'level' => 1,
 		'password' => Hash::make('password'),
 		'picture' => 'default.png',
