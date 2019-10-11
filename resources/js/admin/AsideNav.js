@@ -54,6 +54,11 @@ const AsideNav = ({ auth, location }) => {
 			  <i className="fa fa-tachometer" aria-hidden="true"></i> <span>Dashboard</span>
 			</Link>
 		  </li>
+		  <li className={ activeLinks('/admin/additem') }>
+			<Link to="/admin/additem">
+			  <i className="fa fa-plus"></i> <span>New Comic</span>
+			</Link>
+		  </li>
 		  <li className={ activeLinks('/admin/comics') }>
 			<Link to="/admin/comics">
 			  <i className="fa fa-link"></i> <span>Comic Lists</span>

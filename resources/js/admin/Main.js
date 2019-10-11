@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 import Dashboard from './pages/Dashboard';
+import AddItem from './pages/AddItem';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 
@@ -13,6 +14,7 @@ const Main = ({ location }) => {
 	>
 	  <Switch>
 		<Route path="/admin/dashboard" component={Dashboard} />
+		<Route path="/admin/additem" component={AddItem} />
 		<Route path="/admin/comics" />
 		<Route path="/admin/profile" component={Profile} />
 

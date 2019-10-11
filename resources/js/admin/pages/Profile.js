@@ -185,7 +185,7 @@ const PersonalForm = ({ data }) => {
     );
 }
 
-const ProfilePictureForm = () => {
+const ProfilePictureForm = ({ data }) => {
 
     const [error, setError] = useState(null);
 
@@ -212,7 +212,23 @@ const ProfilePictureForm = () => {
     const chooseFileOnChange = e => {
         setError(null);
 
-        debugger;
+        // debugger;
+    }
+
+    const deleteProfilePictureHandler = () => {
+        if (!confirm('Delete Current Profile Picture?'))
+            return false;
+
+        const url = `/api/user/picture?api_token=${_apiToken.params.api_token}`;
+
+        axios.delete(url)
+            .then(() => {
+                document.location.reload();
+            })
+            .catch(err => {
+                alert(err.response.data);
+                document.location.reload();
+            });
     }
 
     return (
@@ -230,15 +246,28 @@ const ProfilePictureForm = () => {
             />
             <button
                 type="submit"
-                className={"btn btn-primary"}
+                className={"btn btn-primary btn-sm"}
                 style={{
-                      marginTop: '1rem'
+                    marginTop: '1rem',
                 }}
                 title="Upload Selected Image"
                 disabled={error}
             >
                 <i className="fa fa-upload"></i>&nbsp;
                 Upload
+            </button>
+            <button
+                type="button"
+                className={"btn btn-danger btn-sm"}
+                style={{
+                    marginTop: '1rem',
+                }}
+                title="Delete Profile Picture"
+                disabled={data.picture == 'default.png'}
+                onClick={deleteProfilePictureHandler}
+            >
+                <i className="fa fa-trash"></i>&nbsp;
+                Delete
             </button>
         </form>
     );

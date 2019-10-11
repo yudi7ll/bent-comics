@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
 const Dashboard = () => {
     const data = {
@@ -12,7 +12,7 @@ const Dashboard = () => {
 
     return (
         <>
-          <Line
+          <Pie
                 data={data}
                 options={{ maintainAspectRatio: false }}
           />
