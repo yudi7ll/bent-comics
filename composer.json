@@ -58,6 +58,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-		"migrate": "composer dumpautoload && php artisan migrate:fresh --seed"
+		"migrate": "composer dumpautoload && php artisan migrate:fresh --seed",
+        "test": "phpunit --color=always"
     }
 }
